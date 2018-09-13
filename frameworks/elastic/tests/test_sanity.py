@@ -31,7 +31,7 @@ def configure_package(configure_security):
             foldered_name,
             current_expected_task_count,
             additional_options={
-                "service": {"name": foldered_name} })
+                "service": {"name": foldered_name}})
 
         yield  # let the test session execute
     finally:
@@ -98,7 +98,7 @@ def test_endpoints():
     # check that we can reach the scheduler via admin router, and that returned endpoints are sanitized:
     for endpoint in config.ENDPOINT_TYPES:
         endpoints = sdk_cmd.svc_cli(config.PACKAGE_NAME, foldered_name, 'endpoints {}'.format(endpoint), json=True)
-        host = endpoint.split('-')[0] # 'coordinator-http' => 'coordinator'
+        host = endpoint.split('-')[0]  # 'coordinator-http' => 'coordinator'
         assert endpoints['dns'][0].startswith(sdk_hosts.autoip_host(foldered_name, host + '-0-node'))
         assert endpoints['vip'].startswith(sdk_hosts.vip_host(foldered_name, host))
 
@@ -182,7 +182,7 @@ def test_xpack_toggle_with_kibana(default_populated_index):
         config.KIBANA_PACKAGE_NAME,
         config.KIBANA_PACKAGE_NAME,
         0,
-        { "kibana": {
+        {"kibana": {
             "elasticsearch_url": elasticsearch_url
         }},
         timeout_seconds=config.KIBANA_DEFAULT_TIMEOUT,
@@ -214,7 +214,7 @@ def test_xpack_toggle_with_kibana(default_populated_index):
         config.KIBANA_PACKAGE_NAME,
         config.KIBANA_PACKAGE_NAME,
         0,
-        { "kibana": {
+        {"kibana": {
             "elasticsearch_url": elasticsearch_url,
             "xpack_enabled": True
         }},

@@ -12,6 +12,7 @@ import sdk_utils
 
 from tests import config
 
+
 @pytest.fixture(scope='module', autouse=True)
 def configure_package(configure_security):
     test_jobs = []
@@ -26,7 +27,7 @@ def configure_package(configure_security):
             config.PACKAGE_NAME,
             config.get_foldered_service_name(),
             config.DEFAULT_TASK_COUNT,
-            additional_options={"service": {"name": config.get_foldered_service_name()} })
+            additional_options={"service": {"name": config.get_foldered_service_name()}})
 
         yield  # let the test session execute
     finally:
@@ -62,7 +63,7 @@ def test_endpoints():
         'endpoints native-client', json=True)
     assert endpoints['dns'][0] == sdk_hosts.autoip_host(
         config.get_foldered_service_name(), 'node-0-server', 9042)
-    assert not 'vip' in endpoints
+    assert 'vip' not in endpoints
 
 
 @pytest.mark.sanity
